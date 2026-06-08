@@ -1,27 +1,25 @@
 openapi: 3.0.0
 info:
   title: User Service
-  description: Manages user accounts and profiles for the K11 platform
-  version: 1.0.0
+  version: 2.0.0
 paths:
   /api/v2/users:
     get:
       summary: List all users
       operationId: list_users
-      tags: [users]
       parameters:
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 1
-        - name: page_size
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 20
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
       responses:
         '200':
           description: List of users
@@ -32,9 +30,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/User'
     post:
-      summary: Create a new user account
+      summary: Create a new user
       operationId: create_user
-      tags: [users]
       requestBody:
         required: true
         content:
@@ -52,13 +49,12 @@ paths:
     get:
       summary: Get a user by ID
       operationId: get_user
-      tags: [users]
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: User found
@@ -67,36 +63,48 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '404':
-          description: User not found
-  /api/v2/users/{id}/contact:
+          description: Not found
+  /api/v2/users/{id}/preferences:
     get:
-      summary: Get a user's contact information
-      operationId: get_user_contact
-      tags: [users]
+      summary: Get user preferences
+      operationId: get_user_preferences
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Contact info
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ContactInfo'
+          description: Preferences
         '404':
-          description: User not found
+          description: Not found
+  /api/v2/users/{id}/settings:
+    get:
+      summary: Get user settings
+      operationId: get_user_settings
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Settings
+        '404':
+          description: Not found
 components:
   schemas:
     User:
       type: object
-      required: [id, email, name]
+      required:
+      - id
+      - email
+      - name
       properties:
         id:
           type: string
-          description: Unique user identifier
         email:
           type: string
           format: email
@@ -107,7 +115,9 @@ components:
           nullable: true
     CreateUser:
       type: object
-      required: [email, name]
+      required:
+      - email
+      - name
       properties:
         email:
           type: string
@@ -116,7 +126,8 @@ components:
           type: string
     ContactInfo:
       type: object
-      required: [email]
+      required:
+      - email
       properties:
         email:
           type: string
