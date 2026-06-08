@@ -23,6 +23,12 @@ paths:
       responses:
         '200':
           description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
     post:
       summary: Create a new user
       operationId: create_user
@@ -35,6 +41,10 @@ paths:
       responses:
         '201':
           description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
   /api/v2/users/{id}:
     get:
       summary: Get a user by ID
@@ -48,6 +58,10 @@ paths:
       responses:
         '200':
           description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
         '404':
           description: Not found
   /api/v2/users/{id}/contact:
@@ -63,6 +77,10 @@ paths:
       responses:
         '200':
           description: Contact info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactInfo'
         '404':
           description: Not found
 components:
