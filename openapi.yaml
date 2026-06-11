@@ -116,6 +116,12 @@ components:
           type: string
           nullable: true
           description: Optional display name
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          description: User account status
     CreateUser:
       type: object
       required:
