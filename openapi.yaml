@@ -4,7 +4,7 @@ info:
   description: Manages user accounts and profiles for the K11 platform
   version: 2.0.0
 paths:
-  /api/v2/users:
+  /api/v3/users:
     get:
       summary: List all users
       operationId: list_users
@@ -50,7 +50,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /api/v2/users/{id}:
+  /api/v3/users/{id}:
     get:
       summary: Get a user by ID
       operationId: get_user
@@ -71,7 +71,7 @@ paths:
                 $ref: '#/components/schemas/User'
         '404':
           description: User not found
-  /api/v2/users/{id}/contact:
+  /api/v3/users/{id}/contact:
     get:
       summary: Get a user's contact information
       operationId: get_user_contact
