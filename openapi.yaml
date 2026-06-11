@@ -118,6 +118,12 @@ components:
         avatar_url:
           type: string
           nullable: true
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          description: User account status
     CreateUser:
       type: object
       required:
